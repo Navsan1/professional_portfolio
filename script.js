@@ -172,4 +172,22 @@ document.addEventListener('DOMContentLoaded', () => {
             autoRotate = setInterval(rotateStack, 10000);
         });
     }
+
+    // Project Video Playback
+    document.querySelectorAll('.project-card').forEach(card => {
+        const video = card.querySelector('video');
+        if (video) {
+            card.addEventListener('mouseenter', () => {
+                video.play().catch(error => {
+                    // Autoplay might be prevented or no source
+                    console.log("Video play failed:", error);
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
+        }
+    });
 });
